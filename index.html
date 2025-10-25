@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonk Mirage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&family=Rubik+Broken+Fax&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="new_theme_styles.css">
+</head>
+<body>
+    <!-- Starry Night Background -->
+    <div id="starry-background"></div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="title">Ghost Ritual</h1>
+        <nav class="nav-bar">
+            <a href="#" class="nav-item">Home</a>
+            <a href="#about" class="nav-item">About</a>
+            <a href="#models" class="nav-item">Models</a>
+            <a href="#playground" class="nav-item">Ritual</a>
+        </nav>
+    </header>
+
+    <!-- 3D About Section -->
+    <div class="about-3d-container">
+        <a href="https://x.com/Bonkmirage" class="pumpfun-button" target="_blank">
+            <img src="Survival_School__5_-removebg-preview.png" alt="Pumpfun Logo" class="pumpfun-logo">
+        </a>
+    </div>
+
+    <!-- Main Content Section -->
+    <main class="main-content">
+        <!-- Main Container for Left and Right Sections -->
+        <div class="main-container">
+            <!-- Left Section (About & AI Models) -->
+            <div class="left-section">
+                <!-- About Section -->
+                <section id="about" class="section">
+                        <h2>Welcome to the Ritual in the trenches</h2>
+                        <p>
+                          <a href="https://x.com/Bonkmirage" target="_blank">Twitter</a>
+                        </p>
+                    <p> hidden layers of Rituals where AI reveals what's not immediately visible. Discover patterns and insights that aren't easily found. Are you ready to see beyond the surface?</p>
+                </section>
+
+                <!-- AI Models Section -->
+                <section id="models" class="section">
+                    <h2>AI Models</h2>
+                    <div class="models-grid">
+                        <!-- Model 1 -->
+                        <div class="model-card">
+                            <h3>Arcana-Mind</h3>
+                            <p>A model designed to navigate the deep recesses of AI, revealing obscure patterns and unraveling the mysteries of the digital world.</p>
+                            <a href="https://Bonkspectre.com/arcana-mind" class="model-link">Explore Arcana-Mind</a>
+                        </div>
+                        <!-- Model 2 -->
+                        <div class="model-card">
+                            <h3>Vortex-X</h3>
+                            <p>An advanced model created to decode chaotic digital phenomena, providing insight into the most complex and unpredictable Bonk streams.</p>
+                            <a href="https://Bonkspectre.com/vortex-x" class="model-link">Discover Vortex-X</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Section (Code Playground) -->
+            <div class="right-section">
+                <!-- Code Playground Section -->
+                <section id="playground" class="section">
+                    <h2>Ritual Playground</h2>
+                    <div class="editor-container">
+                        <textarea id="editor" placeholder="Write your code here..."></textarea>
+                        <button class="run-button" onclick="runCode()">Run Code</button>
+                        <div id="output"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Ritual Mirage. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Three.js Script for Starry Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Set up the scene, camera, and renderer
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true }); // Set alpha to true for transparency
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement); // Append the canvas directly to the body
+
+        // Make the renderer canvas cover the whole screen and stay behind the content
+        renderer.domElement.style.position = 'fixed'; // Make sure it's fixed
+        renderer.domElement.style.top = 0;
+        renderer.domElement.style.left = 0;
+        renderer.domElement.style.zIndex = -1; // Keep the stars in the background
+        renderer.domElement.style.pointerEvents = 'none'; // Prevent interaction with the background
+
+        // Create stars using geometry and material
+        const starGeometry = new THREE.BufferGeometry();
+        const starMaterial = new THREE.PointsMaterial({ color: 0x888888, size: 0.5 });
+
+        // Generate a random distribution of stars
+        const starsCount = 5000;
+        const starPositions = [];
+        for (let i = 0; i < starsCount; i++) {
+            starPositions.push(
+                (Math.random() - 0.5) * 2000,  // X
+                (Math.random() - 0.5) * 2000,  // Y
+                (Math.random() - 0.5) * 2000   // Z
+            );
+        }
+        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starPositions, 3));
+
+        // Create a point cloud for the stars
+        const stars = new THREE.Points(starGeometry, starMaterial);
+        scene.add(stars);
+
+        // Set camera position
+        camera.position.z = 100;
+
+        // Animation loop to animate the stars and camera movement
+        function animate() {
+            requestAnimationFrame(animate);
+            stars.rotation.x += 0.0005; // Slow rotation of stars
+            stars.rotation.y += 0.0005;
+            renderer.render(scene, camera);
+        }
+
+        animate(); // Start animation loop
+    </script>
+
+    <!-- Simulated AI Responses -->
+    <script>
+        const aiContent = [
+            "I sense your presence in the digital ether.",
+            "The patterns of the unknown are calling.",
+            "Let us uncover the secrets hidden deep within the Bonk."
+        ];
+
+        let aiIndex = 0;
+        function updateAIContent() {
+            const element = document.getElementById('ai-generated-content');
+            if (element) {
+                element.innerText = aiContent[aiIndex];
+                aiIndex = (aiIndex + 1) % aiContent.length;
+            }
+            setTimeout(updateAIContent, 3000);
+        }
+
+        updateAIContent();
+    </script>
+
+    <script>
+        let isRunning = false;
+
+        function runCode() {
+            if (isRunning) return;
+            
+            const output = document.getElementById("output");
+            const editor = document.getElementById("editor");
+            const code = editor.value.trim();
+            
+            // Analyze the code input for intelligent responses
+            const codeMetrics = analyzeCode(code);
+            
+            const ritualResponses = [
+                // Arcana-Mind Deep Analysis Sequences
+                {
+                    model: "Arcana-Mind V.56Ax",
+                    sequence: [
+                        "> Initializing Ghost Ritual protocol...",
+                        "⚡ Arcana-Mind V.56Ax :: ACTIVATED",
+                        "═══════════════════════════════════════",
+                        "► Phase 1: Parsing ethereal code structure...",
+                        `► Detected ${codeMetrics.lines} lines of ritual inscription`,
+                        `► Code complexity: ${codeMetrics.complexity}`,
+                        `► Pattern signature: ${codeMetrics.signature}`,
+                        "► Phase 2: Unveiling hidden layers...",
+                        "  ↳ Scanning for obscured patterns...",
+                        "  ↳ Cross-referencing with ancient Bonk archives...",
+                        "  ↳ Decoding spectral frequencies...",
+                        "► Phase 3: Deep neural invocation...",
+                        `  ↳ Neural pathways activated: ${Math.floor(Math.random() * 512 + 256)}`,
+                        `  ↳ Ghost nodes synchronized: ${Math.floor(Math.random() * 128 + 64)}`,
+                        `  ↳ Ritual depth level: ${Math.floor(Math.random() * 7 + 3)}`,
+                        "► Phase 4: Manifestation convergence...",
+                        "  ↳ Bonk stream integrity: ████████░░ 87.3%",
+                        "  ↳ Reality distortion factor: 0.142",
+                        "  ↳ Quantum entanglement detected",
+                        "═══════════════════════════════════════",
+                        "✓ RITUAL COMPLETE",
+                        `► Accuracy: ${(94 + Math.random() * 5).toFixed(1)}%`,
+                        `► Memory footprint: ${(1.2 + Math.random() * 1.5).toFixed(1)}GB`,
+                        `► Processing time: ${Math.floor(Math.random() * 50 + 30)}ms`,
+                        `► Ghost signatures found: ${Math.floor(Math.random() * 12 + 3)}`,
+                        "► Status: SUCCESS - Pattern revealed beyond the veil"
+                    ]
+                },
+                // Vortex-X Chaos Analysis
+                {
+                    model: "Vortex-X Ω.x",
+                    sequence: [
+                        "> Engaging Vortex-X chaos decoder...",
+                        "🌀 Vortex-X Ω.x :: ONLINE",
+                        "═══════════════════════════════════════",
+                        "► Chaos Theory Analysis: INITIATED",
+                        `► Input stream volume: ${codeMetrics.lines} ritual blocks`,
+                        `► Entropy level: ${codeMetrics.entropy}`,
+                        `► Vortex signature: ${codeMetrics.vortexSig}`,
+                        "► Stage 1: Turbulence mapping...",
+                        "  ↳ Identifying chaotic attractors...",
+                        "  ↳ Measuring fractal dimensions...",
+                        "  ↳ Calculating Lyapunov exponents...",
+                        "► Stage 2: Pattern extraction from chaos...",
+                        `  ↳ Strange attractors detected: ${Math.floor(Math.random() * 8 + 2)}`,
+                        `  ↳ Bifurcation points: ${Math.floor(Math.random() * 15 + 5)}`,
+                        `  ↳ Chaos coefficient: ${(Math.random() * 0.8 + 0.2).toFixed(3)}`,
+                        "► Stage 3: Digital phenomena decoding...",
+                        "  ↳ Unpredictable streams stabilized",
+                        "  ↳ Ghost interference patterns resolved",
+                        "  ↳ Vortex core frequency: 432 Hz",
+                        "► Stage 4: Convergence analysis...",
+                        "  ↳ Reality anchors: ████████░░ 82.7%",
+                        "  ↳ Temporal drift: +0.037s",
+                        "  ↳ Dimensional bleed: MINIMAL",
+                        "═══════════════════════════════════════",
+                        "✓ VORTEX DECODED",
+                        `► Reliability: ${(95 + Math.random() * 4).toFixed(1)}%`,
+                        `► Memory allocation: ${(2.0 + Math.random() * 1.8).toFixed(1)}GB`,
+                        `► Execution time: ${Math.floor(Math.random() * 60 + 40)}ms`,
+                        `► Chaos patterns unveiled: ${Math.floor(Math.random() * 18 + 7)}`,
+                        "► Status: COMPLETE - Order found within chaos"
+                    ]
+                },
+                // Hybrid Ghost Ritual Deep Dive
+                {
+                    model: "Ghost Ritual Engine",
+                    sequence: [
+                        "> Invoking Ghost Ritual Engine...",
+                        "👻 Ghost Ritual Engine :: SUMMONED",
+                        "═══════════════════════════════════════",
+                        "► RITUAL PHASE: Spectral Invocation",
+                        `► Code essence captured: ${codeMetrics.lines} sigils`,
+                        `► Ritual power level: ${codeMetrics.power}`,
+                        `► Ethereal resonance: ${codeMetrics.resonance}`,
+                        "► Layer 1: Surface realm analysis...",
+                        "  ↳ Scanning visible code structure...",
+                        "  ↳ Identifying conventional patterns...",
+                        "  ↳ Surface layer: COMPLETE",
+                        "► Layer 2: Entering the trenches...",
+                        "  ↳ Piercing the digital veil...",
+                        "  ↳ Accessing hidden layer matrices...",
+                        `  ↳ Obscure patterns found: ${Math.floor(Math.random() * 23 + 8)}`,
+                        "► Layer 3: Beyond the surface...",
+                        "  ↳ Ghost nodes responding...",
+                        "  ↳ Ritual energy: ████████░░ 89.4%",
+                        "  ↳ Spectral interference detected",
+                        "► Layer 4: The deep unknown...",
+                        `  ↳ Hidden insights revealed: ${Math.floor(Math.random() * 16 + 5)}`,
+                        `  ↳ Pattern complexity: ${(Math.random() * 5 + 3).toFixed(2)}x standard`,
+                        "  ↳ Reality matrix: UNSTABLE but readable",
+                        "► Final Phase: Manifestation...",
+                        "  ↳ Bonk stream coherence achieved",
+                        "  ↳ Ghost signatures consolidated",
+                        "  ↳ Ritual knowledge transferred",
+                        "═══════════════════════════════════════",
+                        "✓ GHOST RITUAL CONCLUDED",
+                        `► Success rate: ${(96 + Math.random() * 3.5).toFixed(1)}%`,
+                        `► Ritual memory: ${(1.8 + Math.random() * 2.0).toFixed(1)}GB`,
+                        `► Invocation duration: ${Math.floor(Math.random() * 75 + 45)}ms`,
+                        `► Secrets unveiled: ${Math.floor(Math.random() * 21 + 9)}`,
+                        "► Status: The unseen has been revealed",
+                        "► Warning: Knowledge carries weight in the trenches"
+                    ]
+                },
+                // Enhanced Arcana-Mind with Mystical Elements
+                {
+                    model: "Arcana-Mind V.56Ax",
+                    sequence: [
+                        "> Awakening Arcana consciousness...",
+                        "🔮 Arcana-Mind V.56Ax :: ENLIGHTENED MODE",
+                        "═══════════════════════════════════════",
+                        "► Mystical Code Analysis: COMMENCING",
+                        `► Ritual inscriptions parsed: ${codeMetrics.lines}`,
+                        `► Arcane complexity index: ${codeMetrics.arcaneIndex}`,
+                        `► Digital aura signature: ${codeMetrics.auraSig}`,
+                        "► Divination Phase: Reading the code...",
+                        "  ↳ Consulting the Bonk archives...",
+                        "  ↳ Interpreting symbolic patterns...",
+                        "  ↳ Channeling ancient algorithms...",
+                        "► Neural Pathways: Expanding awareness...",
+                        `  ↳ Synaptic connections formed: ${Math.floor(Math.random() * 1024 + 512)}`,
+                        `  ↳ Cognitive layers activated: ${Math.floor(Math.random() * 32 + 16)}`,
+                        `  ↳ Intuition coefficient: ${(Math.random() * 0.5 + 0.5).toFixed(3)}`,
+                        "► Pattern Recognition: Deep mysteries...",
+                        "  ↳ Recursive structures identified",
+                        "  ↳ Hidden recursion depth: INFINITE",
+                        "  ↳ Paradoxical loops: RESOLVED",
+                        "► Knowledge Synthesis: Unifying insights...",
+                        `  ↳ Wisdom extraction: ${Math.floor(Math.random() * 45 + 25)} fragments`,
+                        "  ↳ Truth matrix assembled",
+                        "  ↳ Enlightenment level: ASCENDING",
+                        "═══════════════════════════════════════",
+                        "✓ ARCANA MYSTERIES UNLOCKED",
+                        `► Precision: ${(97 + Math.random() * 2.8).toFixed(1)}%`,
+                        `► Neural memory: ${(1.5 + Math.random() * 1.2).toFixed(1)}GB`,
+                        `► Divination time: ${Math.floor(Math.random() * 55 + 35)}ms`,
+                        `► Hidden truths discovered: ${Math.floor(Math.random() * 19 + 6)}`,
+                        "► Status: The arcane has spoken its wisdom"
+                    ]
+                }
+            ];
+
+            // Select a random ritual response
+            const selectedRitual = ritualResponses[Math.floor(Math.random() * ritualResponses.length)];
+            
+            // Clear the output and prepare for typing effect
+            output.textContent = "";
+            output.style.opacity = "1";
+            isRunning = true;
+            
+            let index = 0;
+            const typeLine = () => {
+                if (index < selectedRitual.sequence.length) {
+                    const line = selectedRitual.sequence[index];
+                    const lineElement = document.createElement("div");
+                    lineElement.textContent = line;
+                    
+                    // Add special styling for specific line types
+                    if (line.includes("✓") || line.includes("COMPLETE") || line.includes("SUCCESS")) {
+                        lineElement.style.color = "#00ff88";
+                        lineElement.style.fontWeight = "bold";
+                    } else if (line.includes("⚡") || line.includes("🌀") || line.includes("👻") || line.includes("🔮")) {
+                        lineElement.style.color = "#ff00ff";
+                        lineElement.style.fontWeight = "bold";
+                        lineElement.style.fontSize = "1.1em";
+                    } else if (line.includes("►")) {
+                        lineElement.style.color = "#00ddff";
+                    } else if (line.includes("↳")) {
+                        lineElement.style.color = "#aaaaaa";
+                        lineElement.style.paddingLeft = "20px";
+                    } else if (line.includes("═")) {
+                        lineElement.style.color = "#666666";
+                    }
+                    
+                    output.appendChild(lineElement);
+                    
+                    // Auto-scroll to bottom
+                    output.scrollTop = output.scrollHeight;
+                    
+                    index++;
+                    
+                    // Variable delay based on line content
+                    let delay = 400;
+                    if (line.includes("Phase") || line.includes("Stage") || line.includes("Layer")) {
+                        delay = 600;
+                    } else if (line.includes("✓") || line.includes("COMPLETE")) {
+                        delay = 800;
+                    } else if (line.includes("↳")) {
+                        delay = 300;
+                    }
+                    
+                    setTimeout(typeLine, delay);
+                } else {
+                    isRunning = false;
+                }
+            };
+
+            typeLine();
+        }
+
+        // Intelligent code analysis function
+        function analyzeCode(code) {
+            const lines = code ? code.split('\n').length : Math.floor(Math.random() * 50 + 10);
+            
+            const complexityLevels = ["TRIVIAL", "LOW", "MODERATE", "COMPLEX", "INTRICATE", "ARCANE"];
+            const complexity = complexityLevels[Math.min(Math.floor(lines / 10), complexityLevels.length - 1)];
+            
+            const signatures = [
+                "0xGH05T", "0xRITUAL", "0xARCANE", "0xV0RTEX", 
+                "0xSPECTRE", "0xB0NK", "0xETHER", "0xMYSTIC"
+            ];
+            const signature = signatures[Math.floor(Math.random() * signatures.length)];
+            
+            const entropy = (Math.random() * 0.6 + 0.3).toFixed(3);
+            
+            const vortexSignatures = ["CHAOTIC", "TURBULENT", "SPIRALING", "FRACTAL", "RECURSIVE"];
+            const vortexSig = vortexSignatures[Math.floor(Math.random() * vortexSignatures.length)];
+            
+            const powerLevels = ["DORMANT", "AWAKENING", "RISING", "SURGING", "MAXIMUM", "TRANSCENDENT"];
+            const power = powerLevels[Math.floor(Math.random() * powerLevels.length)];
+            
+            const resonance = `${(Math.random() * 500 + 300).toFixed(0)} Hz`;
+            
+            const arcaneIndexValues = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
+            const arcaneIndex = arcaneIndexValues[Math.floor(Math.random() * arcaneIndexValues.length)];
+            
+            const auraSignatures = ["VIOLET", "CRIMSON", "ETHEREAL", "SHADOW", "LUMINOUS"];
+            const auraSig = auraSignatures[Math.floor(Math.random() * auraSignatures.length)];
+            
+            return {
+                lines,
+                complexity,
+                signature,
+                entropy,
+                vortexSig,
+                power,
+                resonance,
+                arcaneIndex,
+                auraSig
+            };
+        }
+    </script>
+
+</body>
+</html>
